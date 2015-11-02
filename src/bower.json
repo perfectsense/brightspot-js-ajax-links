@@ -1,0 +1,26 @@
+{
+  "authors": [
+    {
+      "homepage": "http://www.perfectsensedigital.com/",
+      "name": "Perfect Sense Digital"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0",
+    "bsp-utils": ">=1.0.0"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/perfectsense/brightspot-js-ajax-links",
+  "ignore": ["demo","Gruntfile.js","package.json",".gitignore"],
+  "keywords": [
+    "brightspot",
+    "jquery"
+  ],
+  "license": "MIT",
+  "main": [
+    "src/bsp-ajax-links-plugin.js",
+    "src/bsp-ajax-links.js"
+  ],
+  "name": "bsp-ajax-links",
+  "version": "0.0.1"
+}

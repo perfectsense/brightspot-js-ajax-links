@@ -8,7 +8,7 @@ The HTML has a wrap class to place the content on the page which has the data at
 
 ## Usage
 
-Create your HTML with the proper data attributes and classes. The default classes are `toggle-item` and `toggle-trigger` and the following markup works well:
+Create your HTML with the proper data attributes and classes. Example HTML:
 
 	<div class="content-wrap" data-bsp-ajax-links>
 		<div class="content">

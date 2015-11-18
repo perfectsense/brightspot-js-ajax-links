@@ -289,11 +289,11 @@ var bsp_search_results = {
             // we are no longer loading, the content is about to hit the DOM
             $target.removeClass('bsp-loading-ajax');
 
-            // if we are replace type, go ahead and replace and then we just research our original container
-            // as we replaced everything
+            // if we are replace type, go ahead and replace and then we just research our target in order to 
+            // find any clicks to replace. If we happen to have replaced ourselves, this will work too
             if(self.settings.loadType == 'replace') {
                 $target.replaceWith(cleanData);
-                self.replaceNativeActionWithAjax(self.$el);
+                self.replaceNativeActionWithAjax($target);
             } else {
                 // if we are not replacing, we are appending, and in that case save off the new stuff we added
                 // and search just that, we don't want to mess with the clicks/action on the previous form

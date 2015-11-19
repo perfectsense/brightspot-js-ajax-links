@@ -297,7 +297,7 @@ var bsp_search_results = {
             } else {
                 // if we are not replacing, we are appending, and in that case save off the new stuff we added
                 // and search just that, we don't want to mess with the clicks/action on the previous form
-                $newContent = $(cleanData).appendTo($target);
+                $newContent = $(cleanData.html()).appendTo($target);
                 self.replaceNativeActionWithAjax($newContent);
             }
 

@@ -7,9 +7,10 @@
  * The plugin will kill the click on that a element (or submit on the form), ajax in it's href (or action + serialized data)
  * and find the "selectorHere" div on the subsequent page.
  *
- * IMPORTANT: Your Ajaxed page HAS to have the "selectorHere" on it. That's how this code knows what to replace and where.
+ * IMPORTANT: By default your ajaxed page HAS to have the "selectorHere" on it. That's how this code knows what to replace and where.
  * It does NOT assume that it's returning the entire Ajax result into the target. It finds the "selectorHere" on the ajax
- * result and gets it's contents
+ * result and gets it's contents. You can set the "fullPageAjax" to false, which WILL assume that it's returning the entire Ajax
+ * result into target. If that is done, the BE needs to have the logic to only return the contents
  *
  * It will then by default, replace the "selectorHere" on the current page with the newly ajaxed div.
  *

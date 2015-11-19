@@ -1,5 +1,4 @@
 /**
- *
  * This module/plugin will allow for convertion of plain links or forms to ajaxable content.
  * This can be used for use cases such as search results filtering, or where we might want to make an aside module a little more "dynamic"
  *
@@ -45,6 +44,7 @@ var bsp_search_results = {
         dataName : 'data-ajax-link-target',
         historyReplace : false,
         loadType : 'replace',
+        fullPageAjax : true,
         extraParams : {}
     },
 
@@ -268,11 +268,15 @@ var bsp_search_results = {
         // Ajax in the URL with any extra params if necessary
         $.get(options.href+extraParams, function(data) {
 
-            // here we sanitize the data. In case we only got the content div without any parents, we add a parent so
-            // can call a nice clean .find to get our clean data
-            var $div = $('<div>');
-            var $data = $div.html(data);
-            var cleanData = $div.find(options.target);
+            if(self.settings.fullPageAjax) {
+                // here we sanitize the data. In case we only got the content div without any parents, we add a parent so
+                // can call a nice clean .find to get our clean data
+                var $div = $('<div>');
+                var $data = $div.html(data);
+                var cleanData = $div.find(options.target).html();
+            } else {
+                cleanData = data;
+            }
 
             // used as context for searching new content if we are not replacing
             var $newContent;
@@ -289,15 +293,15 @@ var bsp_search_results = {
             // we are no longer loading, the content is about to hit the DOM
             $target.removeClass('bsp-loading-ajax');
 
-            // if we are replace type, go ahead and replace and then we just research our target in order to 
-            // find any clicks to replace. If we happen to have replaced ourselves, this will work too
+            // if we are replace type, go ahead and replace and then we just research our original container
+            // as we replaced everything
             if(self.settings.loadType == 'replace') {
-                $target.replaceWith(cleanData);
+                $target.html(cleanData);
                 self.replaceNativeActionWithAjax($target);
             } else {
                 // if we are not replacing, we are appending, and in that case save off the new stuff we added
                 // and search just that, we don't want to mess with the clicks/action on the previous form
-                $newContent = $(cleanData.html()).appendTo($target);
+                $newContent = $(cleanData).appendTo($target);
                 self.replaceNativeActionWithAjax($newContent);
             }
 

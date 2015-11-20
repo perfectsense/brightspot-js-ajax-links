@@ -12,7 +12,17 @@
  * result and gets it's contents. You can set the "fullPageAjax" to false, which WILL assume that it's returning the entire Ajax
  * result into target. If that is done, the BE needs to have the logic to only return the contents
  *
- * It will then by default, replace the "selectorHere" on the current page with the newly ajaxed div.
+ * There are three loadType modes:
+ * 1) replace (default) - This will replace the content of the "selectorHere" with what is Ajaxed in
+ *
+ * 2) append - This will simply append what is ajaxed here at the end of "selectorHere".
+ *    This is a good mode if you have a infinite load type of experience, but your load more is
+ *    somewhere outside and want to keep using it to add more content
+ *
+ * 3) loadMore - This is a more where we will append the Ajaxed in items to the end of "selectorHere", but we are assuming that you
+ *    used a "loadMore" type button and the new content ALSO has that button. Therefore, we will delete the previous loadMore button
+ *    This is a good mode if you have load more functionality, but it could end, so you want to bring the next load more button in
+ *    with your ajax content. Once the ajaxed content doesn't have the load more, the user will have reached the end.
  *
  * You have the option to set data-bsp-ajax-links=-options to enable loadType (default: replace, optional: append, loadMore).
  * If append is used, the ajaxed "selectorHere" div will be placed after the original "selectorHere"
@@ -43,6 +53,7 @@ var bsp_search_results = {
     // by default, we will not replace history and use the replace method
     defaults: {
         dataName : 'data-ajax-link-target',
+        ajaxLinksClass : 'load-more',
         historyReplace : false,
         loadType : 'replace',
         fullPageAjax : true,
@@ -300,10 +311,23 @@ var bsp_search_results = {
                 $target.html(cleanData);
                 self.replaceNativeActionWithAjax($target);
             } else {
-                // if we are not replacing, we are appending, and in that case save off the new stuff we added
-                // and search just that, we don't want to mess with the clicks/action on the previous form
-                $newContent = $(cleanData).appendTo($target);
-                self.replaceNativeActionWithAjax($newContent);
+
+                if(self.settings.loadType == 'append') {
+                    // We are appending, we just dump in new stuff and we are done
+                    $newContent = $(cleanData).appendTo($target);
+                    self.replaceNativeActionWithAjax($newContent);
+                    return;
+                }
+
+                if(self.settings.loadType == 'loadMore')  {
+                    // We are appending, we dump in new stuff at the end
+                    // we also want to remove the loadMore link that we just used to get more
+                    self.$el.find('.' + self.settings.ajaxLinksClass).remove();
+                    $newContent = $(cleanData).appendTo($target);
+                    self.replaceNativeActionWithAjax($newContent);
+                    return;
+                }
+
             }
 
         });

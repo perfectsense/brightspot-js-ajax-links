@@ -285,7 +285,10 @@ var bsp_search_results = {
                 // can call a nice clean .find to get our clean data
                 var $div = $('<div>');
                 var $data = $div.html(data);
-                var cleanData = $div.find(options.target).html();
+                // here we try to find our target inside our temporary parent
+                // in case we do not find our target, we essentially make the assumption that fullPageAjax option was
+                // incorrect and we got just our target contents
+                var cleanData = $div.find(options.target).html() || data;
             } else {
                 cleanData = data;
             }

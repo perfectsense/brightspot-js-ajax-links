@@ -16,13 +16,14 @@ result and gets it's contents. You can set the "fullPageAjax" to false, which WI
 result into target. If that is done, the BE needs to have the logic to only return the contents
 
 There are three loadType modes:
-1) replace (default) - This will replace the content of the "selectorHere" with what is Ajaxed in
 
-2) append - This will simply append what is ajaxed here at the end of "selectorHere".
+1. replace (default) - This will replace the content of the "selectorHere" with what is Ajaxed in
+
+2. append - This will simply append what is ajaxed here at the end of "selectorHere".
    This is a good mode if you have a infinite load type of experience, but your load more is
    somewhere outside and want to keep using it to add more content
 
-3) loadMore - This is a more where we will append the Ajaxed in items to the end of "selectorHere", but we are assuming that you
+3. loadMore - This is a more where we will append the Ajaxed in items to the end of "selectorHere", but we are assuming that you
    used a "loadMore" type button and the new content ALSO has that button. Therefore, we will delete the previous loadMore button
    This is a good mode if you have load more functionality, but it could end, so you want to bring the next load more button in
    with your ajax content. Once the ajaxed content doesn't have the load more, the user will have reached the end.

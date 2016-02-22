@@ -41,10 +41,11 @@ similar, you can do that by passing a JSON object to "extraParams" which will ge
 ## Usage
 
 Example HTML:
+
 	<div class="content-wrap" data-bsp-ajax-links>
-	     <div class="content">
-	         <a href="this-page-will-ajax-in.html" data-ajax-link-target=".content">
-	     </div>
+		<div class="content">
+			<a href="this-page-will-ajax-in.html" data-ajax-link-target=".content">
+		</div>
 	</div>
 
 ## TODO:

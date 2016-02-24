@@ -48,10 +48,12 @@ import bsp_utils from 'bsp-utils';
 import historyAPI from 'native.history';
 import bsp_autosubmit from 'bsp-autosubmit';
 
-var bsp_search_results = {
+var bsp_ajax_links = {
 
     // by default, we will not replace history and use the replace method
     defaults: {
+        loadingEvent : 'bsp-ajax-links:loading',
+        loadedEvent : 'bsp-ajax-links:loaded',
         dataName : 'data-ajax-link-target',
         ajaxLinksClass : 'load-more',
         historyReplace : false,
@@ -103,10 +105,9 @@ var bsp_search_results = {
     replaceNativeActionWithAjax($context) {
         var self = this;
 
-        var $ajaxLinks = $context.find('[' + self.settings.dataName + ']');
-
-        $ajaxLinks.each(function() {
-
+        // context is a list of items, we want the parent container to find the link.
+        var $ajaxLinks = $context.first().parent().find('[' + self.settings.dataName + ']');
+        $ajaxLinks.each(function () {
             var $this = $(this);
 
             // used to check whether we are a form or link
@@ -225,6 +226,7 @@ var bsp_search_results = {
 
         });
 
+        self.$el.trigger(self.settings.loadedEvent, [$context]);
     },
 
     _getParams(prmstr) {
@@ -252,6 +254,8 @@ var bsp_search_results = {
 
         // once we start ajaxing, we want to add this so we can do pretty CSS loading animations
         $target.addClass('bsp-loading-ajax');
+        self.$el.trigger(self.settings.loadingEvent, [$target]);
+
 
         // if we are a replace type, kill the contents of the content (but leave the div in place, we replace it later)
         if(self.settings.loadType === 'replace') {
@@ -340,4 +344,4 @@ var bsp_search_results = {
 
 };
 
-export default bsp_search_results;
+export default bsp_ajax_links;

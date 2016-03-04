@@ -188,6 +188,9 @@ var bsp_ajax_links = {
                 $this.on('click', function(e) {
                     e.preventDefault();
 
+    	            // this link might change between page loads
+	                var linkHref = $(this).attr('href');
+
                     // if we are set to replace the history, we won't ajax. Instead we will pushState the new
                     // target, load type, and link.
                     // if we are not replacing history, just go ahead and perform the ajax

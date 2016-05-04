@@ -19,8 +19,9 @@
   "license": "MIT",
   "main": [
     "src/bsp-ajax-links-plugin.js",
-    "src/bsp-ajax-links.js"
+    "src/bsp-ajax-links.js",
+    "src/native.history.js"
   ],
   "name": "bsp-ajax-links",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

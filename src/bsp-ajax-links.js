@@ -140,7 +140,8 @@ var bsp_ajax_links = {
 
                     // we need to extend the url params we might have already had with the
                     // form params we picked up
-                    var urlParams = self._getParams(linkHref);
+                    var linkParams = linkHref.split('?')[1] || linkHref.split('?')[0];
+                    var urlParams = self._getParams(linkParams);
                     var formParams = self._getParams(formData);
                     formParams = $.extend({},urlParams,formParams);
 

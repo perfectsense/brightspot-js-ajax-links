@@ -1,0 +1,19 @@
+{
+  "name": "brightspot-js-ajax-links",
+  "version": "1.0.2",
+  "description": "## Overview",
+  "main": "src/bsp-ajax-links-plugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perfectsense/brightspot-js-ajax-links.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/perfectsense/brightspot-js-ajax-links/issues"
+  },
+  "homepage": "https://github.com/perfectsense/brightspot-js-ajax-links#readme"
+}
